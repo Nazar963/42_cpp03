@@ -31,17 +31,33 @@ ClapTrap& ClapTrap::operator=(ClapTrap const &other)
 
 void ClapTrap::attack(const std::string &target)
 {
+	if (this->_hitPoints == 0 || this->_energyPoints == 0)
+	{
+		std::cout << "ClapTrap insufficient resources" << std::endl;
+		return ;
+	}
 	std::cout << "ClapTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
 	this->_energyPoints--;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
+	if (this->_hitPoints == 0)
+	{
+		std::cout << "ClapTrap already dead" << std::endl;
+		return ;
+	}
 	std::cout << "ClapTrap " << this->_name << " takes " << amount << " of damage" << std::endl;
+	this->_hitPoints--;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
+	if (this->_hitPoints == 0 || this->_energyPoints == 0)
+	{
+		std::cout << "ClapTrap insufficient resources" << std::endl;
+		return ;
+	}
 	std::cout << "ClapTrap " << this->_name << " repaired for " << amount << std::endl;
 	this->_hitPoints += amount;
 	this->_energyPoints--;

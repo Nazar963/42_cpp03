@@ -38,6 +38,11 @@ DiamondTrap&	DiamondTrap::operator=(DiamondTrap const &other)
 
 void	DiamondTrap::attack(const std::string &target)
 {
+	if (this->_hitPoints == 0 || this->_energyPoints == 0)
+	{
+		std::cout << "ClapTrap insufficient resources" << std::endl;
+		return ;
+	}
 	ScavTrap::attack(target);
 }
 
